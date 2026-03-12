@@ -6,7 +6,6 @@ version: 2
 before:
   hooks:
     - go mod tidy
-    - go generate ./...
 
 builds:
   - id: mkt36z
@@ -17,7 +16,6 @@ builds:
     goos:
       - linux
       - darwin
-      - windows
     goarch:
       - amd64
       - arm64
@@ -31,13 +29,9 @@ archives:
   - id: default
     format: tar.gz
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    format_overrides:
-      - goos: windows
-        format: zip
     files:
       - LICENSE*
       - README*
-      - completions/*
 
 checksum:
   name_template: "checksums.txt"
@@ -54,63 +48,9 @@ changelog:
       - Merge pull request
       - Merge branch
 
-brews:
-  - name: mkt36z
-    repository:
-      owner: mkt36z
-      name: homebrew-tap
-      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
-    homepage: "https://mkt36z.com"
-    description: "AI-powered marketing intelligence CLI"
-    license: "MIT"
-    install: |
-      bin.install "mkt36z"
-      bash_completion.install "completions/mkt36z.bash" => "mkt36z"
-      zsh_completion.install "completions/mkt36z.zsh" => "_mkt36z"
-      fish_completion.install "completions/mkt36z.fish"
-    test: |
-      system "#{bin}/mkt36z", "version", "--json"
-    skip_upload: auto
-
-scoops:
-  - name: mkt36z
-    repository:
-      owner: mkt36z
-      name: scoop-bucket
-      token: "{{ .Env.SCOOP_BUCKET_TOKEN }}"
-    homepage: "https://mkt36z.com"
-    description: "AI-powered marketing intelligence CLI"
-    license: "MIT"
-    skip_upload: auto
-
-dockers:
-  - image_templates:
-      - "ghcr.io/mkt36z/cli:{{ .Version }}"
-      - "ghcr.io/mkt36z/cli:latest"
-    dockerfile: Dockerfile.release
-    build_flag_templates:
-      - "--label=org.opencontainers.image.title=mkt36z"
-      - "--label=org.opencontainers.image.version={{ .Version }}"
-      - "--platform=linux/amd64"
-    skip_push: auto
-
-signs:
-  - artifacts: checksum
-    cmd: gpg
-    args:
-      - "--batch"
-      - "--local-user"
-      - "{{ .Env.GPG_FINGERPRINT }}"
-      - "--output"
-      - "${signature}"
-      - "--detach-sign"
-      - "${artifact}"
-
 release:
   github:
     owner: mkt36z
     name: cli
-  draft: true
+  draft: false
   prerelease: auto
-  extra_files:
-    - glob: ./completions/*

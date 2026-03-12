@@ -6,7 +6,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
 
 jobs:
   release:
@@ -21,14 +20,6 @@ jobs:
         with:
           go-version: "1.24"
 
-      - name: Generate shell completions
-        run: |
-          go build -o mkt36z ./cmd/mkt36z
-          mkdir -p completions
-          ./mkt36z completion bash > completions/mkt36z.bash
-          ./mkt36z completion zsh > completions/mkt36z.zsh
-          ./mkt36z completion fish > completions/mkt36z.fish
-
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
@@ -36,6 +27,3 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
-          SCOOP_BUCKET_TOKEN: ${{ secrets.SCOOP_BUCKET_TOKEN }}
-          GPG_FINGERPRINT: ${{ secrets.GPG_FINGERPRINT }}
