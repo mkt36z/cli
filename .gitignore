@@ -1,0 +1,13 @@
+bin/
+mkt36z
+*.exe
+coverage.out
+vendor/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+.env
+.env.*
