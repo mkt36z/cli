@@ -1,5 +1,5 @@
 bin/
-mkt36z
+/mkt36z
 *.exe
 coverage.out
 vendor/
