@@ -50,6 +50,7 @@ var workflowListCmd = &cobra.Command{
 
 		if len(names) == 0 {
 			fmt.Println("No workflows found.")
+			fmt.Println("\n  Add custom workflows to ~/.mkt36z/workflows/")
 			return nil
 		}
 
