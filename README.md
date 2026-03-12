@@ -5,6 +5,12 @@ AI-powered marketing intelligence from your terminal. Replace your entire market
 ## Install
 
 ```sh
+curl -sSL https://raw.githubusercontent.com/mkt36z/cli/main/install.sh | sh
+```
+
+Or if `install.mkt36z.com` is configured:
+
+```sh
 curl -sSL https://install.mkt36z.com | sh
 ```
 
