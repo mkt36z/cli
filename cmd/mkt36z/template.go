@@ -50,7 +50,8 @@ var templateListCmd = &cobra.Command{
 
 		if len(names) == 0 {
 			fmt.Println("No templates found.")
-			fmt.Println("\n  Add custom templates to ~/.mkt36z/templates/")
+			fmt.Println("\n  Ensure you are authenticated: mkt36z auth login")
+			fmt.Println("  Or add custom templates to ~/.mkt36z/templates/")
 			return nil
 		}
 

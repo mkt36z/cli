@@ -50,7 +50,8 @@ var playbookListCmd = &cobra.Command{
 
 		if len(names) == 0 {
 			fmt.Println("No playbooks found.")
-			fmt.Println("\n  Add custom playbooks to ~/.mkt36z/playbooks/")
+			fmt.Println("\n  Ensure you are authenticated: mkt36z auth login")
+			fmt.Println("  Or add custom playbooks to ~/.mkt36z/playbooks/")
 			return nil
 		}
 
